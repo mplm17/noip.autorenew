@@ -5,16 +5,18 @@
 # Author: Felipe Molina (@felmoltor)
 # Date: July 2013
 # License: GPLv3
+# updated by @t0mciu (02.08.2016). Changes:
+# - replace http://checkip.dyndns.org to https://api.ipify.org (is faster, thx @LukeOwncloud for tip in perl version)
+# - update log/errors messages
 
 require 'date'
 require 'mechanize'
+require 'net/http'
 
 def getMyCurrentIP()
 	m = Mechanize.new
 	m.user_agent_alias = 'Windows IE 8'
-	
-	ip_page = m.get("http://checkip.dyndns.org/")
-	ip = ip_page.root.xpath("//body").text.gsub(/^.*: /,"")
+	ip = Net::HTTP.get(URI("https://api.ipify.org"))
 	return ip
 end
 
@@ -51,11 +53,12 @@ end
 
 # ================
 
-puts "======= #{Date.today.to_s} ========"
+puts "======== Start job: #{Date.today.to_s} #{Time.now.strftime "%T"} ================================\n\n"
 
 if ARGV[0].nil? or ARGV[1].nil?
-	puts "Error. Especifica el usuario y la contrasenna para acceder a tu cuenta de noip.com"
-	exit(1)
+puts "Error. Enter your username and password to access your account noip.com.\nExample: noip.autorenew.rb john@doe.com johnpass\n\n"
+puts "======== End job: #{Date.today.to_s} #{Time.now.strftime "%T"} ==================================\n\n"
+exit(1)
 else
 	user = ARGV[0]
 	password = ARGV[1]	
@@ -63,7 +66,7 @@ else
 	
 	puts "Getting my current public IP..."
 	my_public_ip = getMyCurrentIP()
-	puts "Done: #{my_public_ip}"
+	puts "Done. This IP is '#{my_public_ip}'"
 	puts "Sending Keep Alive request to noip.com..."
 	updated_hosts = setMyCurrentNoIP(user,password,my_public_ip)	
 	if !updated_hosts.nil? and updated_hosts.size > 0
@@ -72,8 +75,8 @@ else
 			puts "- #{host}"
 		end
 	else
-		$stderr.puts "There was an error updating the domains of noip.com or there were no hosts to update"
+		$stderr.puts "Error!!!\nYou may have entered the wrong username and password,\nor there is no domain to autorenew. Check it!"
 	end
 end
 
-puts "==============================="
+puts "\n======== End job: #{Date.today.to_s} #{Time.now.strftime "%T"} ==================================\n\n"
