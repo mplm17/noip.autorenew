@@ -12,6 +12,14 @@ The script will automatically retrieve the device public IP address and will log
 refresh your hostnames.
 
 
+Usage
+-----
+
+Create a cronjob if desired with this line: 
+
+`./noip.autorenew.rb <usename> <password> [<FQDN>]`
+
+
 Needed gems
 -----------
 
