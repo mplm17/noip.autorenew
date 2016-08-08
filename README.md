@@ -1,5 +1,7 @@
-noip.autorenew
-==============
+noip.autorenew (NOT WORKING ANYMORE)
+====================================
+
+**Note:** This script used to work some time ago, now no-ip doesn't mind that you "manually" update your hosts, the will force to click in their email link to renew the expiration date. I'll leave this project here for educational purpouses
 
 Ussually, when you want to keep alive a hostname of noip.com with a Free Account, they will send you an email every month
 to keep alive this hostname in their DNSs. Thus, you will have to manually login in your noip.com account and click in
