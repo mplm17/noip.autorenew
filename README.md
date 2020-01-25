@@ -1,6 +1,9 @@
 noip.autorenew docker version (forked from <a href="https://github.com/felmoltor/noip.autorenew" target="_blank">`felmoltor/noip.autorenew`</a>)
 ====================================
 
+**Works with Debian. Tested on Debian Buster.**
+**Docker needs to be installed.**
+
 Usually, when you want to keep alive a hostname of noip.com with a Free Account, they will send you an email every month
 to keep alive this hostname in their DNSs. Thus, you will have to manually login in your noip.com account and click in
 "confirm" the hostname to avoid deletion of this hostname from their DNS.
@@ -15,7 +18,7 @@ refresh your hostnames.
 Usage
 -----
 
-1. Set your noip.com account info in noip.autorenew.rb at these lines:
+1. Set your noip.com account info in `noip.autorenew.rb` at these lines:
 ``` bash
 user = "no-ip_username"
 password = "no-ip_password"
