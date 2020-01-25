@@ -8,10 +8,17 @@
 # updated by @t0mciu (02.08.2016). Changes:
 # - replace http://checkip.dyndns.org to https://api.ipify.org (is faster, thx @LukeOwncloud for tip in perl version)
 # - update log/errors messages
+# updated by @mplm17 (01.25.2020), Changes:
+# - no-ip username and password are setted in that file and not given in argument anymore
+# - domain to update is now a mandatory argument
 
 require 'date'
 require 'mechanize'
 require 'net/http'
+
+user = "no-ip_username"
+password = "no-ip_password"
+domain_to_update = ARGV[0] if !ARGV[0].nil?
 
 def getMyCurrentIP()
     m = Mechanize.new do |agent|
@@ -57,15 +64,11 @@ end
 
 puts "======== Start job: #{Date.today.to_s} #{Time.now.strftime "%T"} ================================\n\n"
 
-if ARGV[0].nil? or ARGV[1].nil?
-puts "Error. Enter your username and password to access your account noip.com.\nExample: noip.autorenew.rb john@doe.com johnpass\n\n"
+if domain_to_update.nil?
+puts "Error. Enter the FQDN you want to update. \nExample: noip.autorenew.rb mydomain.ddns.net\n\n"
 puts "======== End job: #{Date.today.to_s} #{Time.now.strftime "%T"} ==================================\n\n"
 exit(1)
 else
-    user = ARGV[0]
-    password = ARGV[1]  
-    domain_to_update = ARGV[2] if !ARGV[2].nil? 
-    
     puts "Getting my current public IP..."
     my_public_ip = getMyCurrentIP()
     puts "Done. This IP is '#{my_public_ip}'"
