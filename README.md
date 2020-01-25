@@ -30,6 +30,10 @@ docker build -t noip-autorenew-image .
 docker run --name noip-autorenew -dit noip-autorenew-image
 ```
 4. Create a cronjob if desired with this line: 
-`0 0 1,15 * * docker exec noip-autorenew ./noip.autorenew.rb <FQDN> >/dev/null 2>&1`
+``` bash
+0 0 1,15 * * docker exec noip-autorenew ./noip.autorenew.rb <FQDN> >/dev/null 2>&1
+```
 5. You can try it manually:
+``` bash
 docker exec noip-autorenew ./noip.autorenew.rb <FQDN>
+```
