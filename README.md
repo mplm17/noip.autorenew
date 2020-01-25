@@ -1,8 +1,8 @@
-noip.autorenew docker version (forked from <a href="https://github.com/felmoltor/noip.autorenew" target="_blank">`felmoltor/noip.autorenew`</a>)
+noip.autorenew Docker version (forked from <a href="https://github.com/felmoltor/noip.autorenew" target="_blank">felmoltor/noip.autorenew</a>)
 ====================================
 
 **Works with Debian. Tested on Debian Buster.**
-**Docker needs to be installed.**
+**<a href="https://docs.docker.com/" target="_blank">Docker</a> needs to be installed.**
 
 Usually, when you want to keep alive a hostname of noip.com with a Free Account, they will send you an email every month
 to keep alive this hostname in their DNSs. Thus, you will have to manually login in your noip.com account and click in
@@ -25,7 +25,7 @@ password = "no-ip_password"
 ```
 2. Build docker image:
 ``` bash
-cd noip.autorenew/
+cd noip.autorenew.dockerized/
 docker build -t noip-autorenew-image .
 ```
 3. Run docker container:
